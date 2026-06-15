@@ -1,0 +1,20 @@
+services:
+  sip-mf-simulator-postgres-db:
+    image: postgres:latest
+
+    container_name: sip-mf-simulator-postgres-container
+
+    environment:
+      POSTGRES_USER: mayur
+      POSTGRES_PASSWORD: mayur
+      POSTGRES_DB: sipMfSimulatorDB
+
+    ports:
+      - "5432:5432"
+
+    volumes:
+      - sip_mf_simulator_postgres_data:/var/lib/postgresql
+
+
+volumes:
+  sip_mf_simulator_postgres_data:
