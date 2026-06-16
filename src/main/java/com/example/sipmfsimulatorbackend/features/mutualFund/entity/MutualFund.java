@@ -1,4 +1,4 @@
-package com.example.sipmfsimulatorbackend.features.mutualFund.controller;
+package com.example.sipmfsimulatorbackend.features.mutualFund.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
@@ -48,3 +48,4 @@ public class MutualFund {
     @UpdateTimestamp
     private LocalDateTime updatedAt;
 }
+
