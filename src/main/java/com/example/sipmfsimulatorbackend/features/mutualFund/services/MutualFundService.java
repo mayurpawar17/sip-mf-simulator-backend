@@ -6,14 +6,8 @@ import org.springframework.data.domain.Page;
 
 public interface MutualFundService {
 
-    Page<FundResponse> getAllFunds(
-            int page,
-            int size,
-            String sortBy
-    );
+    Page<FundResponse> getAllFunds(int page, int size, String sortBy);
 
-    FundDetailsResponse getFundById(
-            Long fundId
-    );
+    FundDetailsResponse getFundById(Long fundId);
 }
 
