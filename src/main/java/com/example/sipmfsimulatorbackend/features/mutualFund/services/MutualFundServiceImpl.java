@@ -7,10 +7,7 @@ import com.example.sipmfsimulatorbackend.features.mutualFund.dto.FundResponse;
 import com.example.sipmfsimulatorbackend.features.mutualFund.entity.MutualFund;
 import com.example.sipmfsimulatorbackend.features.mutualFund.repo.MutualFundRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.*;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -24,14 +21,14 @@ public class MutualFundServiceImpl implements MutualFundService {
 
 
     @Override
-    public Page<FundResponse> getAllFunds(int page, int size) {
+    public Page<FundResponse> getAllFunds(int page, int size, String sortBy, String sortDir) {
+        // 1. Safeguard pagination size limits against API abuse (e.g., someone asking for size=10000)
+        int maxPageSize = Math.min(size, 100);
 
-        Pageable pageable =
-                PageRequest.of(
-                        page,
-                        size,
-                        Sort.by("schemeName").descending()
-                );
+        // 2. Build dynamic sort conditions safely
+        Sort sort = sortDir.equalsIgnoreCase(Sort.Direction.ASC.name()) ? Sort.by(sortBy).ascending() : Sort.by(sortBy).descending();
+
+        Pageable pageable = PageRequest.of(page, maxPageSize, sort);
 
         return fundRepository.findAll(pageable).map(MutualFundMapper::toResponse);
     }
@@ -42,6 +39,27 @@ public class MutualFundServiceImpl implements MutualFundService {
         MutualFund fund = fundRepository.findById(fundId).orElseThrow(() -> new ResourceNotFoundException("Fund not found with id : " + fundId));
 
         return MutualFundMapper.toDetails(fund);
+    }
+
+    @Override
+    public Page<FundResponse> searchFunds(String keyword, int page, int size, String sortBy, String sortDir) {
+        // 1. Guard rails against malicious API sizing
+        int maxPageSize = Math.min(size, 100);
+
+        // 2. Sanitize search inputs
+        if (keyword == null || keyword.trim().isEmpty()) {
+            return getAllFunds(page, maxPageSize, sortBy, sortDir);
+        }
+
+        // 3. Dynamic Sort configuration
+        Sort sort = sortDir.equalsIgnoreCase(Sort.Direction.ASC.name())
+                ? Sort.by(sortBy).ascending()
+                : Sort.by(sortBy).descending();
+
+        Pageable pageable = PageRequest.of(page, maxPageSize, sort);
+
+        return fundRepository.searchBySchemeName(keyword.trim(), pageable)
+                .map(MutualFundMapper::toResponse);
     }
 }
 
