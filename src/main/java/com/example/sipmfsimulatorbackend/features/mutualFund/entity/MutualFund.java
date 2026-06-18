@@ -8,15 +8,52 @@ import org.hibernate.annotations.UpdateTimestamp;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+//
+//@Entity
+//@Table(
+//        name = "mutual_funds",
+//        indexes = {
+//                @Index(name = "idx_scheme_code", columnList = "scheme_code"),
+//                @Index(name = "idx_fund_name", columnList = "fund_name")
+//        }
+//)
+//@Getter
+//@Setter
+//@NoArgsConstructor
+//@AllArgsConstructor
+//@Builder
+//public class MutualFund {
+//
+//    @Id
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    private Long id;
+//
+//    @Column(nullable = false)
+//    private String fundName;
+//
+//    @Column(nullable = false, unique = true)
+//    private String schemeCode;
+//
+
+/// /    @Column(nullable = false)
+/// /    private String amc;
+//
+//    @Column(nullable = false, precision = 19, scale = 4)
+//    private BigDecimal latestNav;
+//
+//    private LocalDate navDate;
+//
+//    @CreationTimestamp
+//    private LocalDateTime createdAt;
+//
+//    @UpdateTimestamp
+//    private LocalDateTime updatedAt;
+//}
+//
+
 
 @Entity
-@Table(
-        name = "mutual_funds",
-        indexes = {
-                @Index(name = "idx_scheme_code", columnList = "scheme_code"),
-                @Index(name = "idx_fund_name", columnList = "fund_name")
-        }
-)
+@Table(name = "mutual_funds", uniqueConstraints = {@UniqueConstraint(columnNames = "scheme_code")})
 @Getter
 @Setter
 @NoArgsConstructor
@@ -28,24 +65,15 @@ public class MutualFund {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false)
-    private String fundName;
+    @Column(name = "scheme_code")
+    private Long schemeCode;
 
-    @Column(nullable = false, unique = true)
-    private String schemeCode;
+    @Column(name = "scheme_name")
+    private String schemeName;
 
-    @Column(nullable = false)
-    private String amc;
+    @Column(name = "isin_growth")
+    private String isinGrowth;
 
-    @Column(nullable = false, precision = 19, scale = 4)
-    private BigDecimal latestNav;
-
-    private LocalDate navDate;
-
-    @CreationTimestamp
-    private LocalDateTime createdAt;
-
-    @UpdateTimestamp
-    private LocalDateTime updatedAt;
+    @Column(name = "isin_div_reinvestment")
+    private String isinDivReinvestment;
 }
-

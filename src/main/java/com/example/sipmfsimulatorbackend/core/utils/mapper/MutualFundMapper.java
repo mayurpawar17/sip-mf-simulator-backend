@@ -9,27 +9,11 @@ public class MutualFundMapper {
     private MutualFundMapper() {
     }
 
-    public static FundResponse toResponse(
-            MutualFund fund
-    ) {
-        return FundResponse.builder()
-                .fundId(fund.getId())
-                .fundName(fund.getFundName())
-                .schemeCode(fund.getSchemeCode())
-                .latestNav(fund.getLatestNav())
-                .build();
+    public static FundResponse toResponse(MutualFund fund) {
+        return FundResponse.builder().id(fund.getId()).schemeName(fund.getSchemeName()).schemeCode(String.valueOf(fund.getSchemeCode())).isinGrowth(fund.getIsinGrowth()).isinDivReinvestment(fund.getIsinDivReinvestment()).build();
     }
 
-    public static FundDetailsResponse toDetails(
-            MutualFund fund
-    ) {
-        return FundDetailsResponse.builder()
-                .fundId(fund.getId())
-                .fundName(fund.getFundName())
-                .schemeCode(fund.getSchemeCode())
-                .amc(fund.getAmc())
-                .latestNav(fund.getLatestNav())
-                .navDate(fund.getNavDate())
-                .build();
+    public static FundDetailsResponse toDetails(MutualFund fund) {
+        return FundDetailsResponse.builder().id(fund.getId()).schemeName(fund.getSchemeName()).schemeCode(String.valueOf(fund.getSchemeCode())).isinGrowth(fund.getIsinGrowth()).isinDivReinvestment(fund.getIsinDivReinvestment()).build();
     }
 }

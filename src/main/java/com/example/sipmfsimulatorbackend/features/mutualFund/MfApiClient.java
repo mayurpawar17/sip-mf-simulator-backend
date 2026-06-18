@@ -1,6 +1,6 @@
 package com.example.sipmfsimulatorbackend.features.mutualFund;
 
-import com.example.sipmfsimulatorbackend.features.mutualFund.dto.MfSchemeResponse;
+import com.example.sipmfsimulatorbackend.features.mutualFund.dto.MfApiResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.client.WebClient;
@@ -13,8 +13,8 @@ public class MfApiClient {
 
     private final WebClient mfApiWebClient;
 
-    public List<MfSchemeResponse> fetchAllFunds() {
+    public List<MfApiResponse> fetchAllFunds() {
 
-        return mfApiWebClient.get().uri("/mf").retrieve().bodyToFlux(MfSchemeResponse.class).collectList().block();
+        return mfApiWebClient.get().uri("/mf").retrieve().bodyToFlux(MfApiResponse.class).collectList().block();
     }
 }

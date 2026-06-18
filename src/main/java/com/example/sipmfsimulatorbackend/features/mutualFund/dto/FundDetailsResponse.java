@@ -2,9 +2,6 @@ package com.example.sipmfsimulatorbackend.features.mutualFund.dto;
 
 import lombok.*;
 
-import java.math.BigDecimal;
-import java.time.LocalDate;
-
 @Getter
 @Setter
 @Builder
@@ -12,15 +9,13 @@ import java.time.LocalDate;
 @AllArgsConstructor
 public class FundDetailsResponse {
 
-    private Long fundId;
+    private Long id;
 
-    private String fundName;
+    private String schemeName;
 
     private String schemeCode;
 
-    private String amc;
+    private String isinGrowth;
+    private String isinDivReinvestment;
 
-    private BigDecimal latestNav;
-
-    private LocalDate navDate;
 }

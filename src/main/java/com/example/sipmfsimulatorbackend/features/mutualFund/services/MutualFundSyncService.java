@@ -1,6 +1,6 @@
 package com.example.sipmfsimulatorbackend.features.mutualFund.services;
 
-public interface FundSyncService {
+public interface MutualFundSyncService {
 
-    Integer syncFunds();
+    void syncMutualFunds();
 }

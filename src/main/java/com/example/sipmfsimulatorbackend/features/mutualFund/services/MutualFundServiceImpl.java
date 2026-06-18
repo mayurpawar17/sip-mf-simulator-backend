@@ -2,7 +2,6 @@ package com.example.sipmfsimulatorbackend.features.mutualFund.services;
 
 import com.example.sipmfsimulatorbackend.core.exception.ResourceNotFoundException;
 import com.example.sipmfsimulatorbackend.core.utils.mapper.MutualFundMapper;
-import com.example.sipmfsimulatorbackend.features.mutualFund.MfApiClient;
 import com.example.sipmfsimulatorbackend.features.mutualFund.dto.FundDetailsResponse;
 import com.example.sipmfsimulatorbackend.features.mutualFund.dto.FundResponse;
 import com.example.sipmfsimulatorbackend.features.mutualFund.entity.MutualFund;
@@ -14,22 +13,25 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.reactive.function.client.WebClient;
 
 @Service
 @RequiredArgsConstructor
 @Transactional(readOnly = true)
 public class MutualFundServiceImpl implements MutualFundService {
 
-    private final MfApiClient mfApiClient;
 
     private final MutualFundRepository fundRepository;
 
 
     @Override
-    public Page<FundResponse> getAllFunds(int page, int size, String sortBy) {
+    public Page<FundResponse> getAllFunds(int page, int size) {
 
-        Pageable pageable = PageRequest.of(page, size, Sort.by(sortBy).ascending());
+        Pageable pageable =
+                PageRequest.of(
+                        page,
+                        size,
+                        Sort.by("schemeName").descending()
+                );
 
         return fundRepository.findAll(pageable).map(MutualFundMapper::toResponse);
     }

@@ -1,7 +1,6 @@
 package com.example.sipmfsimulatorbackend.features.admin.controller;
 
-import com.example.sipmfsimulatorbackend.core.utils.dto.ApiResponse;
-import com.example.sipmfsimulatorbackend.features.mutualFund.services.FundSyncService;
+import com.example.sipmfsimulatorbackend.features.mutualFund.services.MutualFundSyncService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -13,13 +12,13 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 public class FundAdminController {
 
-    private final FundSyncService fundSyncService;
+    private final MutualFundSyncService service;
 
     @PostMapping("/sync")
-    public ResponseEntity<ApiResponse<Integer>> syncFunds() {
+    public ResponseEntity<String> sync() {
 
-        Integer count = fundSyncService.syncFunds();
+        service.syncMutualFunds();
 
-        return ResponseEntity.ok(ApiResponse.success("Funds synchronized successfully", count));
+        return ResponseEntity.ok("Sync Completed");
     }
 }
