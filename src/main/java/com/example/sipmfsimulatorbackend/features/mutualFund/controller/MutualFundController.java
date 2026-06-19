@@ -24,7 +24,6 @@ public class MutualFundController {
     private final MutualFundService fundService;
 
 
-
     @GetMapping
     public ResponseEntity<ApiResponse<List<FundResponse>>> getAllFunds(
 
