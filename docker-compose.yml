@@ -8,6 +8,8 @@ services:
       POSTGRES_USER: mayur
       POSTGRES_PASSWORD: mayur
       POSTGRES_DB: sipMfSimulatorDB
+      TZ: "Asia/Kolkata"
+      PGTZ: "Asia/Kolkata"
 
     ports:
       - "5432:5432"

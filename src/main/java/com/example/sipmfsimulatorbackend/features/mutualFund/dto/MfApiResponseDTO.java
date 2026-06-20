@@ -5,7 +5,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class MfApiResponse {
+public class MfApiResponseDTO {
     private String schemeCode;
 
     private String schemeName;

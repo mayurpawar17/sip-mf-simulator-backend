@@ -2,8 +2,8 @@ package com.example.sipmfsimulatorbackend.features.mutualFund.services;
 
 import com.example.sipmfsimulatorbackend.core.exception.ResourceNotFoundException;
 import com.example.sipmfsimulatorbackend.core.utils.mapper.MutualFundMapper;
-import com.example.sipmfsimulatorbackend.features.mutualFund.dto.FundDetailsResponse;
-import com.example.sipmfsimulatorbackend.features.mutualFund.dto.FundResponse;
+import com.example.sipmfsimulatorbackend.features.mutualFund.dto.FundDetailsResponseDTO;
+import com.example.sipmfsimulatorbackend.features.mutualFund.dto.FundResponseDTO;
 import com.example.sipmfsimulatorbackend.features.mutualFund.entity.MutualFund;
 import com.example.sipmfsimulatorbackend.features.mutualFund.repo.MutualFundRepository;
 import lombok.RequiredArgsConstructor;
@@ -21,7 +21,7 @@ public class MutualFundServiceImpl implements MutualFundService {
 
 
     @Override
-    public Page<FundResponse> getAllFunds(int page, int size, String sortBy, String sortDir) {
+    public Page<FundResponseDTO> getAllFunds(int page, int size, String sortBy, String sortDir) {
         // 1. Safeguard pagination size limits against API abuse (e.g., someone asking for size=10000)
         int maxPageSize = Math.min(size, 100);
 
@@ -34,7 +34,7 @@ public class MutualFundServiceImpl implements MutualFundService {
     }
 
     @Override
-    public FundDetailsResponse getFundById(Long fundId) {
+    public FundDetailsResponseDTO getFundById(Long fundId) {
 
         MutualFund fund = fundRepository.findById(fundId).orElseThrow(() -> new ResourceNotFoundException("Fund not found with id : " + fundId));
 
@@ -42,7 +42,7 @@ public class MutualFundServiceImpl implements MutualFundService {
     }
 
     @Override
-    public Page<FundResponse> searchFunds(String keyword, int page, int size, String sortBy, String sortDir) {
+    public Page<FundResponseDTO> searchFunds(String keyword, int page, int size, String sortBy, String sortDir) {
         // 1. Guard rails against malicious API sizing
         int maxPageSize = Math.min(size, 100);
 

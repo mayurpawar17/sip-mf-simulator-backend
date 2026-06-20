@@ -8,7 +8,7 @@ import lombok.*;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class FundResponse {
+public class FundResponseDTO {
 
     private Long id;
 

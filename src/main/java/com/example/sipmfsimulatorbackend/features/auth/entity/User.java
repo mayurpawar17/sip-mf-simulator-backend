@@ -2,10 +2,7 @@ package com.example.sipmfsimulatorbackend.features.auth.entity;
 
 import com.example.sipmfsimulatorbackend.core.utils.enums.Role;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 //import org.springframework.data.annotation.Id;
 
 @Entity
@@ -14,6 +11,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 public class User {
 
     @Id
@@ -24,6 +22,8 @@ public class User {
 
     @Column(unique = true)
     private String email;
+    @Column(unique = true)
+    private String mobileNumber;
 
     private String password;
 

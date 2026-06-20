@@ -8,9 +8,10 @@ spring:
 
 
   datasource:
-    url: jdbc:postgresql://localhost:5432/sipMfSimulatorDB
-    username: mayur
-    password: mayur
+    url: jdbc:postgresql://ep-lingering-resonance-at33bntp.c-9.us-east-1.aws.neon.tech/neondb?sslmode=require&channelBinding=require
+#    url: jdbc:postgresql://localhost:5432/sipMfSimulatorDB
+    username: neondb_owner
+    password: npg_vh1g2PktBHAN
     driver-class-name: org.postgresql.Driver
 
   jpa:

@@ -1,6 +1,6 @@
 package com.example.sipmfsimulatorbackend.features.mutualFund.services;
 
-import com.example.sipmfsimulatorbackend.features.mutualFund.dto.MfApiResponse;
+import com.example.sipmfsimulatorbackend.features.mutualFund.dto.MfApiResponseDTO;
 import com.example.sipmfsimulatorbackend.features.mutualFund.repo.MutualFundBatchRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -24,7 +24,7 @@ public class MutualFundSyncServiceImpl implements MutualFundSyncService {
 
         log.info("Starting MF Sync");
 
-        List<MfApiResponse> allFunds = mfApiWebClient.get().uri("/mf").retrieve().bodyToFlux(MfApiResponse.class).collectList().block();
+        List<MfApiResponseDTO> allFunds = mfApiWebClient.get().uri("/mf").retrieve().bodyToFlux(MfApiResponseDTO.class).collectList().block();
 
         if (allFunds == null || allFunds.isEmpty()) {
 
@@ -40,7 +40,7 @@ public class MutualFundSyncServiceImpl implements MutualFundSyncService {
         log.info("Mutual Fund Sync Completed");
     }
 
-    private void processInBatches(List<MfApiResponse> funds) {
+    private void processInBatches(List<MfApiResponseDTO> funds) {
 
         int totalRecords = funds.size();
 
@@ -48,7 +48,7 @@ public class MutualFundSyncServiceImpl implements MutualFundSyncService {
 
             int end = Math.min(start + BATCH_SIZE, totalRecords);
 
-            List<MfApiResponse> batch = funds.subList(start, end);
+            List<MfApiResponseDTO> batch = funds.subList(start, end);
 
             repository.batchUpsert(batch);
 

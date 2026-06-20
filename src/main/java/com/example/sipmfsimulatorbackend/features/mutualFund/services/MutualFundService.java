@@ -1,16 +1,15 @@
 package com.example.sipmfsimulatorbackend.features.mutualFund.services;
 
-import com.example.sipmfsimulatorbackend.features.mutualFund.dto.FundDetailsResponse;
-import com.example.sipmfsimulatorbackend.features.mutualFund.dto.FundResponse;
+import com.example.sipmfsimulatorbackend.features.mutualFund.dto.FundDetailsResponseDTO;
+import com.example.sipmfsimulatorbackend.features.mutualFund.dto.FundResponseDTO;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Slice;
 
 public interface MutualFundService {
 
-    Page<FundResponse> getAllFunds(int page, int size, String sortBy, String sortDir);
+    Page<FundResponseDTO> getAllFunds(int page, int size, String sortBy, String sortDir);
 
-    FundDetailsResponse getFundById(Long fundId);
+    FundDetailsResponseDTO getFundById(Long fundId);
 
-    Page<FundResponse> searchFunds(String keyword, int page, int size, String sortBy, String sortDir);
+    Page<FundResponseDTO> searchFunds(String keyword, int page, int size, String sortBy, String sortDir);
 }
 

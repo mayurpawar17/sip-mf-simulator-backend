@@ -1,6 +1,6 @@
 package com.example.sipmfsimulatorbackend.features.mutualFund.repo;
 
-import com.example.sipmfsimulatorbackend.features.mutualFund.dto.MfApiResponse;
+import com.example.sipmfsimulatorbackend.features.mutualFund.dto.MfApiResponseDTO;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -15,7 +15,7 @@ public class MutualFundBatchRepository {
     private final JdbcTemplate jdbcTemplate;
 
     @Transactional
-    public void batchUpsert(List<MfApiResponse> funds) {
+    public void batchUpsert(List<MfApiResponseDTO> funds) {
 
         String sql = """
                 INSERT INTO mutual_funds
