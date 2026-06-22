@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Optional;
 
 @Repository
@@ -17,6 +18,8 @@ public interface SipRepository extends JpaRepository<Sip, Long> {
      */
     @Query("SELECT s FROM Sip s JOIN FETCH s.mutualFund WHERE s.id = :sipId")
     Optional<Sip> findByIdWithFundDetails(@Param("sipId") Long sipId);
+
+    List<Sip> findByUserId(Long userId);
 }
 
 
